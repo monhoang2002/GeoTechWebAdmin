@@ -359,8 +359,19 @@ const DetailContent = ({ data, close }) => {
                   <div className="flex flex-col ml-2">
                     <Typography.Text className="text-base text-black font-semibold">
                       {product.option_id.product_id.name} -{" "}
-                      {product.option_id.price.toLocaleString("vi-VN")} đ
+                      {
+    product.option_id.price.toLocaleString("vi-VN") 
+  } đ
                     </Typography.Text>
+                    <Typography.Text>
+                    {product.discount_value ? `Đã giảm giá ${product.discount_value}% ` : 'Đã giảm giá 0%'}
+ :{" "}
+{(
+  (
+    product.option_id.price * (1 - (product.discount_value ? product.discount_value / 100 : 0))
+  )
+).toLocaleString("vi-VN")}{" "}
+đ                    </Typography.Text>
                     <Typography.Text>
                       màu sản phẩm: {product.option_id.name_color}
                     </Typography.Text>
@@ -368,12 +379,15 @@ const DetailContent = ({ data, close }) => {
                       Số lượng mua: {product.quantity}
                     </Typography.Text>
                     <Typography.Text>
-                      Tổng tiền :{" "}
-                      {(
-                        product.quantity * product.option_id.price
-                      ).toLocaleString("vi-VN")}{" "}
-                      đ
-                    </Typography.Text>
+  Tổng tiền :{" "}
+  {(
+    product.quantity * 
+    (product.option_id.price * (1 - (product.discount_value ? product.discount_value / 100 : 0)))
+  ).toLocaleString("vi-VN")}{" "}
+  đ
+</Typography.Text>
+
+                   
                   </div>
                 </div>
               );
