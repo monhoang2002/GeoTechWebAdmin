@@ -60,9 +60,9 @@ const App = () => {
     getItem("Mọi người", "user", <UserGroupIcon className="w-5 h-5" />, [
       // getItem(<Link to={"/stores"}>Cửa hàng</Link>, "/stores"),
       getItem(<Link to="/customers">Người dùng</Link>, "/customers"),
-      role == "admin"
-        ? getItem(<Link to="/staffs">Nhân viên</Link>, "/staffs")
-        : null,
+      // role == "admin"
+      //   ? getItem(<Link to="/staffs">Nhân viên</Link>, "/staffs")
+      //   : null,
     ]),
   ];
 
