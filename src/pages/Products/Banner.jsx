@@ -45,7 +45,7 @@ const Banner = () => {
               danger
               onClick={() => {
                 Modal.confirm({
-                  title: "Bạn muốn xóa banner này?",
+                  title: "Bạn muốn xóa quảng cáo?",
                   okButtonProps: {
                     style: {
                       backgroundColor: "#407cff",
@@ -62,7 +62,7 @@ const Banner = () => {
                         dispatch(fetchBannerRequest());
                         notification.success({
                           message: "Thành công",
-                          description: "Xóa sản quảng cáo công!",
+                          description: "Xóa quảng cáo thành công!",
                           duration: 3,
                           type: "success",
                         });
@@ -71,7 +71,7 @@ const Banner = () => {
                         console.log(error);
                         notification.error({
                           error: "Thất Bại",
-                          description: "Xóa quảng cáo thất bại",
+                          description: "Xóa quảng cáo thất bại!",
                           duration: 3,
                           type: "error",
                         });

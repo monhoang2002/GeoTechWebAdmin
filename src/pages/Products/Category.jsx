@@ -63,50 +63,7 @@ const Category = () => {
             >
               Sửa
             </Button>
-            <Button
-              danger
-              onClick={() => {
-                Modal.confirm({
-                  title: "Bạn muốn xóa loại sản phẩm?",
-                  okButtonProps: {
-                    style: {
-                      backgroundColor: "#407cff",
-                    },
-                  },
-                  onOk: () => {
-                    axios
-                      .delete(
-                        `${import.meta.env.VITE_BASE_URL}category/delete/${
-                          record._id
-                        }`,
-                        {
-                          headers: { Authorization: `Bearer ${token}` },
-                        }
-                      )
-                      .then((response) => {
-                        dispatch(fetchCategoryRequest());
-                        notification.success({
-                          message: "Thành công",
-                          description: "Thêm thể loại thành công!",
-                          duration: 3,
-                          type: "success",
-                        });
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                        notification.error({
-                          message: "Thất Bại",
-                          description: "Thêm thể loại thất bại",
-                          duration: 3,
-                          type: "error",
-                        });
-                      });
-                  },
-                });
-              }}
-            >
-              xóa
-            </Button>
+           
           </div>
         );
       },

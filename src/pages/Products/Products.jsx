@@ -189,57 +189,57 @@ const Products = () => {
         );
       },
     },
-    {
-      title: "",
-      key: "delete",
-      render: (record) => {
-        return (
-          <Button
-            danger
-            onClick={() => {
-              Modal.confirm({
-                title: "Xóa sản phẩm",
-                content: `Bạn muốn xóa sản phẩm ${record.name}?`,
-                okButtonProps: {
-                  style: {
-                    backgroundColor: "#407cff",
-                  },
-                },
-                onOk: () => {
-                  axios
-                    .delete(
-                      `${
-                        import.meta.env.VITE_BASE_URL
-                      }products/delete-product/${record?._id}`,
-                      { headers: { Authorization: `Bearer ${token}` } }
-                    )
-                    .then((response) => {
-                      notification.success({
-                        message: "Thành công",
-                        description: "Xóa sản phẩm thành công!",
-                        duration: 3,
-                        type: "success",
-                      });
-                      dispatch(fetchProductRequest());
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                      notification.error({
-                        error: "Thất Bại",
-                        description: "Xóa sản phẩm thất bại",
-                        duration: 3,
-                        type: "error",
-                      });
-                    });
-                },
-              });
-            }}
-          >
-            Xóa
-          </Button>
-        );
-      },
-    },
+    // {
+    //   title: "",
+    //   key: "delete",
+    //   render: (record) => {
+    //     return (
+    //       <Button
+    //         danger
+    //         onClick={() => {
+    //           Modal.confirm({
+    //             title: "Xóa sản phẩm",
+    //             content: `Bạn muốn xóa sản phẩm ${record.name}?`,
+    //             okButtonProps: {
+    //               style: {
+    //                 backgroundColor: "#407cff",
+    //               },
+    //             },
+    //             onOk: () => {
+    //               axios
+    //                 .delete(
+    //                   `${
+    //                     import.meta.env.VITE_BASE_URL
+    //                   }products/delete-product/${record?._id}`,
+    //                   { headers: { Authorization: `Bearer ${token}` } }
+    //                 )
+    //                 .then((response) => {
+    //                   notification.success({
+    //                     message: "Thành công",
+    //                     description: "Xóa sản phẩm thành công!",
+    //                     duration: 3,
+    //                     type: "success",
+    //                   });
+    //                   dispatch(fetchProductRequest());
+    //                 })
+    //                 .catch((error) => {
+    //                   console.log(error);
+    //                   notification.error({
+    //                     error: "Thất Bại",
+    //                     description: "Xóa sản phẩm thất bại",
+    //                     duration: 3,
+    //                     type: "error",
+    //                   });
+    //                 });
+    //             },
+    //           });
+    //         }}
+    //       >
+    //         Xóa
+    //       </Button>
+    //     );
+    //   },
+    // },
   ];
   const removeAccents = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
