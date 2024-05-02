@@ -182,12 +182,28 @@ const DetailContent = ({ data, close }) => {
           )
           .then((response) => {
             dispatch(fetchInvoiceRequest(token));
-            close();
-            notification.success({
-              message: "Thành công",
-              description: "Upate trạng thái đơn hàng thành công!",
-              duration: 3,
-              type: "success",
+            axios.post(
+              `${import.meta.env.VITE_BASE_URL}notifi/postnotifi`,
+              {
+                receiver_id: data.user_id,
+                order_id: data._id,
+                content: data.createdAt,
+                type: "wfd",
+              }
+            )
+            .then((response) => {
+              notification.success({
+                message: "Thành công",
+                description: "Upate trạng thái đơn hàng thành công!",
+                duration: 3,
+                type: "success",
+                
+              });
+              close();    
+
+            })
+            .catch((error) => {
+              console.log("Lỗi khi gửi yêu cầu đẩy thông báo:", error);
             });
           })
           .catch((error) => {
@@ -215,12 +231,28 @@ const DetailContent = ({ data, close }) => {
           )
           .then((response) => {
             dispatch(fetchInvoiceRequest(token));
-            close();
-            notification.success({
-              message: "Thành công",
-              description: "Upate trạng thái đơn hàng thành công!",
-              duration: 3,
-              type: "success",
+            axios.post(
+              `${import.meta.env.VITE_BASE_URL}notifi/postnotifi`,
+              {
+                receiver_id: data.user_id,
+                order_id: data._id,
+                content: data.createdAt,
+                type: "delivere",
+              }
+            )
+            .then((response) => {
+              notification.success({
+                message: "Thành công",
+                description: "Upate trạng thái đơn hàng thành công!",
+                duration: 3,
+                type: "success",
+                
+              });
+              close();    
+
+            })
+            .catch((error) => {
+              console.log("Lỗi khi gửi yêu cầu đẩy thông báo:", error);
             });
           })
           .catch((error) => {
@@ -249,19 +281,35 @@ const DetailContent = ({ data, close }) => {
           )
           .then((response) => {
             dispatch(fetchInvoiceRequest(token));
-            close();
-            notification.success({
-              message: "Thành công",
-              description: "Update trạng thái đơn hàng thành công!",
-              duration: 3,
-              type: "success",
+            axios.post(
+              `${import.meta.env.VITE_BASE_URL}notifi/postnotifi`,
+              {
+                receiver_id: data.user_id,
+                order_id: data._id,
+                content: data.createdAt,
+                type: "delivered",
+              }
+            )
+            .then((response) => {
+              notification.success({
+                message: "Thành công",
+                description: "Upate trạng thái đơn hàng thành công!",
+                duration: 3,
+                type: "success",
+                
+              });
+              close();    
+
+            })
+            .catch((error) => {
+              console.log("Lỗi khi gửi yêu cầu đẩy thông báo:", error);
             });
           })
           .catch((error) => {
             console.log(error);
             notification.error({
               error: "Thất Bại",
-              description: "Update trạng thái đơn hàng thất bại",
+              description: "Upate trạng thái đơn hàng thất bại",
               duration: 3,
               type: "error",
             });
@@ -282,12 +330,28 @@ const DetailContent = ({ data, close }) => {
           )
           .then((response) => {
             dispatch(fetchInvoiceRequest(token));
-            close();
-            notification.success({
-              message: "Thành công",
-              description: "Upate trạng thái đơn hàng thành công!",
-              duration: 3,
-              type: "success",
+            axios.post(
+              `${import.meta.env.VITE_BASE_URL}notifi/postnotifi`,
+              {
+                receiver_id: data.user_id,
+                order_id: data._id,
+                content: data.createdAt,
+                type: "wfd",
+              }
+            )
+            .then((response) => {
+              notification.success({
+                message: "Thành công",
+                description: "Upate trạng thái đơn hàng thành công!",
+                duration: 3,
+                type: "canceled",
+                
+              });
+              close();    
+
+            })
+            .catch((error) => {
+              console.log("Lỗi khi gửi yêu cầu đẩy thông báo:", error);
             });
           })
           .catch((error) => {
