@@ -43,6 +43,8 @@ const Home = () => {
   const [loadingTop10Product, setLoadingTop10Product] = useState(false);
   const [top5UserByProduct, setTop5UserByProduct] = useState(null);
   const [loadingTopUserByProduct,setLoadingTopUserByProduct] = useState(false);
+  const [topLeastSellingProducts,setTopLeastSellingProducts] = useState(null);
+  const [loadingtopleastSellingProducts,setLoadingTopleteastSellingProducts] = useState(false);
   const [topStore, setTopStore] = useState(null);
   const [loadingTopStore, setLoadingTopStore] = useState(false);
   const [startDate, setStartDate] = useState(null);
@@ -65,6 +67,27 @@ const Home = () => {
   //     });
   // }, []);
   
+  //---------Top sản phẩm bán ít-------------
+  useEffect(() => {
+    setLoadingTopleteastSellingProducts(true);
+
+    const url = `http://localhost:3000/api/statistical/get-top-least-selling-products`;
+    const params = {
+      startDate: startDate ? startDate.format('YYYY-MM-DD') : '',
+      endDate: endDate ? endDate.format('YYYY-MM-DD') : '',
+    };
+
+    axios
+      .get(url, { params })
+      .then((response) => {
+        setLoadingTopleteastSellingProducts(false);
+        setTopLeastSellingProducts(response.data);
+      })
+      .catch((error) => {
+        setLoadingTopleteastSellingProducts(false);
+        console.log(error);
+      });
+  }, [startDate, endDate]);
   //------------Tổng doanh thu-----------
   useEffect(() => {
     const url = `${import.meta.env.VITE_BASE_URL}statistical/get-total-revenue`;
@@ -382,6 +405,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <div className="flex">
       <div className="w-1/2 p-3">
           <div className="flex flex-col border rounded-md shadow-lg">
             <div className="p-2 px-5">
@@ -398,7 +423,31 @@ const Home = () => {
               loading={loadingTopUserByProduct}
             />
           </div>
+          
         </div>
+
+        {/* // --------------Bảng 2------------ */}
+        <div className="w-1/2 p-3">
+          <div className="flex flex-col border rounded-md shadow-lg">
+            <div className="p-2 px-5">
+              <Typography.Title level={4} style={{ marginBottom: 0 }}>
+                Top sản phẩm bán ít nhất
+              </Typography.Title>
+            </div>
+            <Table
+              // Cấu hình bảng thứ hai
+              pagination={false}
+              dataSource={topLeastSellingProducts?.data}
+              columns={columns2}
+              rowKey={(record) => record.id}
+              loading={loadingtopleastSellingProducts}
+            />
+          </div>
+        </div>
+      </div>
+
+      
+        
     </div>
   );
 };
