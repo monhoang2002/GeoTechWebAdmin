@@ -45,7 +45,7 @@ const Banner = () => {
               danger
               onClick={() => {
                 Modal.confirm({
-                  title: "Bạn muốn xóa loại sản phẩm?",
+                  title: "Bạn muốn xóa banner này?",
                   okButtonProps: {
                     style: {
                       backgroundColor: "#407cff",

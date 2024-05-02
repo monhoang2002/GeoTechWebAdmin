@@ -99,7 +99,11 @@ const Invoice = () => {
       title: "Trạng thái đơn hàng",
       dataIndex: "status",
       key: "status",
-      sorter: (a, b) => a.status.localeCompare(b.status),
+      sorter: (a, b) => {
+        // Sắp xếp theo thời gian tạo đơn
+        const timeA = new Date(a.createdAt).getTime();
+        const timeB = new Date(b.createdAt).getTime();
+        return timeA - timeB;},
       filters: [
         { text: "Đã hủy", value: "Đã hủy" },
         { text: "Đã giao hàng", value: "Đã giao hàng" },
