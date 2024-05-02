@@ -336,7 +336,7 @@ const DetailContent = ({ data, close }) => {
                 receiver_id: data.user_id,
                 order_id: data._id,
                 content: data.createdAt,
-                type: "wfd",
+                type: "canceled",
               }
             )
             .then((response) => {
