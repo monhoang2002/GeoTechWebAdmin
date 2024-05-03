@@ -12,6 +12,8 @@ import {
   Typography,
   notification,
 } from "antd";
+import ShowReviewsModal from "./danhgia";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductRequest } from "../../redux/actions/Product";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,7 +25,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { PlusOutlined } from "@ant-design/icons";
 import "./DialogUpdateProduct.css";
 import { fetchProductDetailRequest } from "../../redux/actions/DetailProduct";
-
+const { Text } = Typography;
 const Products = () => {
   const token = Cookies.get("token");
   const loadingProduct = useSelector((state) => state.productReducer.loading);
@@ -50,6 +52,14 @@ const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState();
   const [openDialogSendEmail, setOpenDialogSendEmail] = useState(false);
   const [openDialogEditProduct, setOpenDialogEditProduct] = useState(false);
+
+  const [selectedProductId, setSelectedProductId] = useState(null);
+
+  // Hàm xử lý khi click vào nút hiển thị đánh giá
+  const handleShowReviews = (productId) => {
+    setSelectedProductId(productId);
+  };
+
 
   const columns = [
     {
@@ -189,58 +199,19 @@ const Products = () => {
         );
       },
     },
-    // {
-    //   title: "",
-    //   key: "delete",
-    //   render: (record) => {
-    //     return (
-    //       <Button
-    //         danger
-    //         onClick={() => {
-    //           Modal.confirm({
-    //             title: "Xóa sản phẩm",
-    //             content: `Bạn muốn xóa sản phẩm ${record.name}?`,
-    //             okButtonProps: {
-    //               style: {
-    //                 backgroundColor: "#407cff",
-    //               },
-    //             },
-    //             onOk: () => {
-    //               axios
-    //                 .delete(
-    //                   `${
-    //                     import.meta.env.VITE_BASE_URL
-    //                   }products/delete-product/${record?._id}`,
-    //                   { headers: { Authorization: `Bearer ${token}` } }
-    //                 )
-    //                 .then((response) => {
-    //                   notification.success({
-    //                     message: "Thành công",
-    //                     description: "Xóa sản phẩm thành công!",
-    //                     duration: 3,
-    //                     type: "success",
-    //                   });
-    //                   dispatch(fetchProductRequest());
-    //                 })
-    //                 .catch((error) => {
-    //                   console.log(error);
-    //                   notification.error({
-    //                     error: "Thất Bại",
-    //                     description: "Xóa sản phẩm thất bại",
-    //                     duration: 3,
-    //                     type: "error",
-    //                   });
-    //                 });
-    //             },
-    //           });
-    //         }}
-    //       >
-    //         Xóa
-    //       </Button>
-    //     );
-    //   },
-    // },
+
+    {
+      title: "Hiển thị đánh giá",
+      key: "showReviews",
+      render: (record) => (
+        <Button onClick={() => handleShowReviews(record._id)}>
+          Hiển thị đánh giá
+        </Button>
+      ),
+    },
+  
   ];
+  
   const removeAccents = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   };
@@ -323,6 +294,10 @@ const Products = () => {
         bordered
         rowKey={(record) => record._id}
       />
+      <ShowReviewsModal
+      productId={selectedProductId}
+      onClose={() => setSelectedProductId(null)}
+    />
       <DialogUpateProduct
         open={openDialogEditProduct}
         productId={selectedProduct}
