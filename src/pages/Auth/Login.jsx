@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./login.css";
-import {
-  Card,
-  Typography,
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  notification,
-} from "antd";
+import { Card, Typography, Button, Form, Input, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLoginRequest } from "../../redux/actions/Auth";
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 
 const { Title } = Typography;
 
@@ -39,7 +30,7 @@ const Login = () => {
         duration: 3,
       });
     } else if (data) {
-      if (data.role == "customer") {
+      if (data.role === "customer") {
         notification.error({
           message: "Login Failed",
           description: "Bạn không có quyền truy cập",
@@ -48,26 +39,15 @@ const Login = () => {
       } else {
         Cookies.set("token", data.token);
         Cookies.set("role", data.role);
-        // Cookies.set("email", email);
-        // Cookies.set("pass", password);
         navigate("/");
       }
     }
   }, [error, data, navigate]);
 
   return (
-    <div className="flex justify-center items-center h-[100vh]">
-      <div className="gradient-bg"></div> {/* Thêm lớp gradient-bg cho nền */}
-      <Card
-        bordered={false}
-        style={{
-          width: 500,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <div className="flex-login">
+      <div className="gradient-bg"></div>
+      <Card bordered={false} className="login-form">
         <Title level={3}>Đăng nhập</Title>
         <Form
           name="loginForm"
@@ -85,7 +65,7 @@ const Login = () => {
             rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input
-              placeholder="email"
+              placeholder="Email"
               className="h-12 text-base"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -100,14 +80,11 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Item>
-          {/* <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item> */}
           <Form.Item>
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full bg-[#4096ff] h-[50px] text-base"
+              className="w-full h-[50px] text-base login-button"
               loading={loading}
             >
               Đăng nhập

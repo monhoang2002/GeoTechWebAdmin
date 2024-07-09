@@ -51,160 +51,18 @@ const Home = () => {
   const [endDate, setEndDate] = useState(null);
   const [totalRevenue, setTotalRevenue] = useState(null);
   const [ordersSuccessfully, setOrdersSuccessfully] = useState(null);
-  // useEffect(() => {
-  //   setLoadingTop5Product(true);
-  //   axios
-  //     .get(
-  //       `${import.meta.env.VITE_BASE_URL}statistical/get-top-product-by-revenue`
-  //     )
-  //     .then((response) => {
-  //       setLoadingTop5Product(false);
-  //       setTop5Product(response.data);
-  //     })
-  //     .catch((e) => {
-  //       setLoadingTop5Product(false);
-  //       console.log(e);
-  //     });
-  // }, []);
-  
+
   //---------Top sản phẩm bán ít-------------
-  useEffect(() => {
-    setLoadingTopleteastSellingProducts(true);
 
-    const url = `http://localhost:3000/api/statistical/get-top-least-selling-products`;
-    const params = {
-      startDate: startDate ? startDate.format('YYYY-MM-DD') : '',
-      endDate: endDate ? endDate.format('YYYY-MM-DD') : '',
-    };
-
-    axios
-      .get(url, { params })
-      .then((response) => {
-        setLoadingTopleteastSellingProducts(false);
-        setTopLeastSellingProducts(response.data);
-      })
-      .catch((error) => {
-        setLoadingTopleteastSellingProducts(false);
-        console.log(error);
-      });
-  }, [startDate, endDate]);
   //------------Tổng doanh thu-----------
-  useEffect(() => {
-    const url = `${import.meta.env.VITE_BASE_URL}statistical/get-total-revenue`;
-    const params = {
-      startDate: startDate ? startDate.format('YYYY-MM-DD') : '',
-      endDate: endDate ? endDate.format('YYYY-MM-DD') : '',
-    };
-
-    axios
-      .get(url, { params })
-      .then((response) => {
-        setTotalRevenue(response.data.data.totalRevenue);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [startDate, endDate]);
+  
 
   //----------Tổng đơn thành công--------------
-  useEffect(() => {
-    const url = `${import.meta.env.VITE_BASE_URL}statistical/get-successful-orders`;
-    const params = {
-      startDate: startDate ? startDate.format('YYYY-MM-DD') : '',
-      endDate: endDate ? endDate.format('YYYY-MM-DD') : '',
-    };
-
-    axios
-      .get(url, { params })
-      .then((response) => {
-        setOrdersSuccessfully(response.data.data.successfulOrders);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [startDate, endDate]);
+ 
 
   //-----------------------Top 5 sản phẩm doanh thu cao nhất-----------
-  useEffect(() => {
-    setLoadingTop5Product(true);
 
-    const url = `${import.meta.env.VITE_BASE_URL}statistical/get-top-product-by-revenue`;
-    const params = {
-      startDate: startDate ? startDate.format('YYYY-MM-DD') : '',
-      endDate: endDate ? endDate.format('YYYY-MM-DD') : '',
-    };
-
-    axios
-      .get(url, { params })
-      .then((response) => {
-        setLoadingTop5Product(false);
-        setTop5Product(response.data);
-      })
-      .catch((error) => {
-        setLoadingTop5Product(false);
-        console.log(error);
-      });
-  }, [startDate, endDate]);
-
-  useEffect(() => {
-    setLoadingTop10Product(true);
-
-    const url = `http://localhost:3000/api/statistical/get-top-products-by-sold-quantity`;
-    const params = {
-      startDate: startDate ? startDate.format('YYYY-MM-DD') : '',
-      endDate: endDate ? endDate.format('YYYY-MM-DD') : '',
-    };
-
-    axios
-      .get(url, { params })
-      .then((response) => {
-        setLoadingTop10Product(false);
-        setTop10ProductSelling(response.data);
-      })
-      .catch((error) => {
-        setLoadingTop10Product(false);
-        console.log(error);
-      });
-  }, [startDate, endDate]);
-
-  useEffect(() => {
-    setLoadingTopUserByProduct(true);
-
-    const url = `http://localhost:3000/api/statistical/get-top-users-by-sold-quantity`;
-    const params = {
-      startDate: startDate ? startDate.format('YYYY-MM-DD') : '',
-      endDate: endDate ? endDate.format('YYYY-MM-DD') : '',
-    };
-
-    axios
-      .get(url, { params })
-      .then((response) => {
-        setLoadingTopUserByProduct(false);
-        setTop5UserByProduct(response.data);
-      })
-      .catch((error) => {
-        setLoadingTopUserByProduct(false);
-        console.log(error);
-      });
-  }, [startDate, endDate]);
-
-
-
-  useEffect(() => {
-    setLoadingTopStore(true);
-    axios
-      .get(
-        `${import.meta.env.VITE_BASE_URL}statistical/get-top-store-by-revenue`
-      )
-      .then((response) => {
-        setLoadingTopStore(false);
-        setTopStore(response.data);
-      })
-      .catch((e) => {
-        setLoadingTopStore(false);
-        console.log(e);
-      });
-  }, []);
+  
 
   const columns = [
     {
@@ -318,7 +176,7 @@ const Home = () => {
         <Card bordered size="default" className="shadow-md  m-3">
           <Statistic
             title="Người dùng kích hoạt"
-            value={dataUser ? dataUser?.result.length : 0}
+            //value={dataUser ? dataUser?.result.length : 0}
             formatter={formatter}
             loading={loadingUser}
           />
@@ -340,18 +198,11 @@ const Home = () => {
           loading={loadingInvoice}
         />
       </Card>
-        {/* <Card bordered size="default" className="shadow-md m-3">
-          <Statistic
-            title="Cửa hàng kích hoạt"
-            value={dataStore ? dataStore?.data.length : 0}
-            formatter={formatter}
-            loading={loadingStore}
-          />
-        </Card> */}
+        
         <Card bordered size="default" className="shadow-md  m-3">
           <Statistic
             title="Sản phẩm hiện có"
-            value={dataProduct ? dataProduct?.result.length : 0}
+            //value={dataProduct ? dataProduct?.result.length : 0}
             formatter={formatter}
             loading={loadingProduct}
           />

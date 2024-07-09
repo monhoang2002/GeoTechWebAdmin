@@ -8,33 +8,18 @@ import {
   Layout,
   Select,
   Typography,
-  notification,
-} from "antd";
+  } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import Cookies from "js-cookie";
-import { fetchProductDetailRequest } from "../../redux/actions/DetailProduct";
 
 const { Header } = Layout;
 
 const EditProduct = () => {
   const { id } = useParams();
   const [form] = Form.useForm();
-  const token = Cookies.get("token");
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const dataCategory = useSelector((state) => state.categoryReducer.data);
-  const [data, setData] = useState;
-
-  useEffect(() => {
-    if (id) {
-      axios.get(
-        `${import.meta.env.VITE_BASE_URL}products/detail-product/${id}`
-      );
-    }
-    console.log(data);
-  }, [id]);
 
   const handleFinish = (values) => {};
 
@@ -49,6 +34,7 @@ const EditProduct = () => {
         {item.component}
       </Form.Item>
     ));
+
   const formItems = [
     {
       label: "Tên sản phẩm",
@@ -82,7 +68,6 @@ const EditProduct = () => {
             label: category.name,
             value: category._id,
           }))}
-          onChange={(value) => setSelectedCategory(value)}
         />
       ),
     },
@@ -269,15 +254,13 @@ const EditProduct = () => {
       ),
     },
   ];
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header className="flex flex-row bg-slate-50 shadow-lg  items-center">
-        <ArrowLeftOutlined
-          className="w-7 h-7 text-xl"
-          onClick={() => navigate(-1)}
-        />
+        <ArrowLeftOutlined className="w-7 h-7 text-xl" onClick={() => navigate(-1)} />
         <Typography.Title level={4} style={{ margin: 0 }}>
-          Sửa thôn tin sản phẩm
+          Sửa thông tin sản phẩm
         </Typography.Title>
       </Header>
       <Flex
@@ -292,33 +275,29 @@ const EditProduct = () => {
           labelCol={{ span: 6 }}
           labelAlign="left"
           initialValues={{
-            name: data ? data?.result.name : "",
-            manufacturer: data ? data?.result.manufacturer : "",
-            category_id: data ? data?.result.category_id?.name : undefined,
-            status: data ? data?.result.status : undefined,
-            description: data ? data?.result.description : "",
-            screen: data ? data?.result.screen : "",
-            camera: data ? data?.result.camera : "",
-            chipset: data ? data?.result.chipset : "",
-            cpu: data ? data?.result.cpu : "",
-            gpu: data ? data?.result.gpu : "",
-            rom: data ? data?.result.rom : undefined,
-            ram: data ? data?.result.ram : undefined,
-            operatingSystem: data ? data?.result.operatingSystem : undefined,
-            battery: data ? data?.result.battery : "",
-            weight: data ? data?.result.weight : undefined,
-            connection: data ? data?.result.connection : "",
-            specialFeature: data ? data?.result.specialFeature : "",
-            other: data ? data?.result.other : "",
+            name: "",
+            manufacturer: "",
+            category_id: undefined,
+            status: undefined,
+            description: "",
+            screen: "",
+            camera: "",
+            chipset: "",
+            cpu: "",
+            gpu: "",
+            rom: undefined,
+            ram: undefined,
+            operatingSystem: undefined,
+            battery: "",
+            weight: undefined,
+            connection: "",
+            specialFeature: "",
+            other: "",
           }}
         >
           {renderFormItems(formItems)}
           <Form.Item>
-            <Button
-              htmlType="submit"
-              type="primary"
-              className="bg-[#407cff] w-[30%]"
-            >
+            <Button htmlType="submit" type="primary" className="bg-[#407cff] w-[30%]">
               Sửa sản phẩm
             </Button>
           </Form.Item>
@@ -329,3 +308,6 @@ const EditProduct = () => {
 };
 
 export default EditProduct;
+
+
+//nh
